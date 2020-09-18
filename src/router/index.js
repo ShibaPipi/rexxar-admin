@@ -130,6 +130,19 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/users',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/users/index'),
+        name: 'Users',
+        meta: { title: 'users', icon: 'people' }
+      }
+    ]
+  },
+
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',

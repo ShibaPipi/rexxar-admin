@@ -75,7 +75,7 @@ export default {
   login: {
     title: 'Formulario de acceso',
     logIn: 'Acceso',
-    username: 'Usuario',
+    name: 'Usuario',
     password: 'Contraseña',
     any: 'nada',
     thirdparty: 'Conectar con',

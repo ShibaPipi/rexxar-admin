@@ -3,6 +3,7 @@ export default {
     dashboard: 'Dashboard',
     documentation: 'Documentation',
     guide: 'Guide',
+    users: 'Users',
     permission: 'Permission',
     pagePermission: 'Page Permission',
     rolePermission: 'Role Permission',
@@ -75,7 +76,7 @@ export default {
   login: {
     title: 'Login Form',
     logIn: 'Login',
-    username: 'Username',
+    name: 'Name',
     password: 'Password',
     any: 'any',
     thirdparty: 'Or connect with',

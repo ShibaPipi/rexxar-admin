@@ -104,7 +104,7 @@ export default {
 
   .github-corner {
     position: absolute;
-    top: 0px;
+    top: 0;
     border: 0;
     right: 0;
   }

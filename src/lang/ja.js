@@ -75,7 +75,7 @@ export default {
   login: {
     title: 'ユーザログイン',
     logIn: 'ログイン',
-    username: 'ユーザ名',
+    name: 'ユーザ名',
     password: 'パスワード',
     any: 'password',
     thirdparty: '外部IDでログイン',

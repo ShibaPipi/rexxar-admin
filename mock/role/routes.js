@@ -74,6 +74,19 @@ const constantRoutes = [
 
 const asyncRoutes = [
   {
+    path: '/users',
+    component: 'layout/Layout',
+    children: [
+      {
+        path: 'index',
+        component: 'views/users/index',
+        name: 'Users',
+        meta: { title: 'users', icon: 'icon' }
+      }
+    ]
+  },
+
+  {
     path: '/permission',
     component: 'layout/Layout',
     redirect: '/permission/index',
