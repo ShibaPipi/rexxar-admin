@@ -105,7 +105,7 @@ export default {
     }
     return {
       loginForm: {
-        name: 'admin',
+        name: 'pipi',
         password: '111111'
       },
       loginRules: {

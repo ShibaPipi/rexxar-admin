@@ -65,6 +65,7 @@
 <script>
 import { fetchList } from '@/api/article'
 import Sortable from 'sortablejs'
+import { log } from '@/utils/debug'
 
 export default {
   name: 'DragTable',
@@ -98,9 +99,10 @@ export default {
   methods: {
     async getList() {
       this.listLoading = true
-      const { data } = await fetchList(this.listQuery)
-      this.list = data.items
-      this.total = data.total
+      const res = await fetchList(this.listQuery)
+      log(res)
+      this.list = res.items
+      this.total = res.total
       this.listLoading = false
       this.oldList = this.list.map(v => v.id)
       this.newList = this.oldList.slice()

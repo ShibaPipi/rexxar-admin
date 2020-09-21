@@ -5,6 +5,7 @@ import { getToken, setToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
+  // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   baseURL: 'http://www.rexxar.com/api/v2/admin', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
@@ -45,35 +46,25 @@ service.interceptors.response.use(
     if (token !== undefined) {
       setToken(token)
     }
-    const { code, status, message } = response.data
-    // if the custom status is not success, it is judged as an error.
-    if (status !== 'success') {
-      Message({
-        message: message || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
-      if (code === 422 || code === 400) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(message || 'Error'))
-    } else {
-      return response.data
-    }
+
+    return response.data.data
   },
   error => {
-    console.log('err' + error) // for debug
+    const { code, message } = error.response.data
+    if (code === 422) {
+      // to re-login
+      MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
+        confirmButtonText: 'Re-Login',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        store.dispatch('user/resetToken').then(() => {
+          location.reload()
+        })
+      })
+    }
     Message({
-      message: error.message,
+      message: message,
       type: 'error',
       duration: 5 * 1000
     })

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/vue-element-admin/article/list',
+    url: 'http://localhost:9527/dev-api/vue-element-admin/article/list',
     method: 'get',
     params: query
   })
