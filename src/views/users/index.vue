@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
     <el-table
-      :data="users"
+      v-loading="listLoading"
+      :data="list"
       style="width: 100%"
     >
       <el-table-column
@@ -44,19 +45,18 @@ export default {
     return {
       listLoading: true,
       listQuery: {},
-      users: []
+      list: []
     }
   },
   created() {
     this.getList()
   },
   methods: {
-    getList() {
+    async getList() {
       this.listLoading = true
-      fetchList(this.listQuery).then(res => {
-        this.users = res.data
-        this.listLoading = false
-      })
+      const res = await fetchList(this.listQuery)
+      this.list = res.data
+      this.listLoading = false
     }
   }
 }
