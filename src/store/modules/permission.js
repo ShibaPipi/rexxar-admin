@@ -27,7 +27,9 @@ export function filterAsyncRoutes(routes, roles) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles)
       }
-      res.push(tmp)
+      if (!tmp.children || tmp.children.length > 0) {
+        res.push(tmp)
+      }
     }
   })
 
