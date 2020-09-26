@@ -12,6 +12,6 @@ export function togglePostStatus(id, status) {
   return request({
     url: '/posts/' + id,
     method: 'put',
-    params: status
+    params: { status }
   })
 }

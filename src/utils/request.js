@@ -2,6 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken, setToken } from '@/utils/auth'
+import { log } from '@/utils/debug'
 
 // create an axios instance
 const service = axios.create({
@@ -41,12 +42,14 @@ service.interceptors.request.use(
  */
 service.interceptors.response.use(
   response => {
-    const token = response.headers['Authorization']
+    // Refresh token silently, no sense of continuation of login status.
+    const token = response.headers.authorization
     if (token !== undefined) {
+      store.commit('user/SET_TOKEN', token)
       setToken(token)
     }
 
-    return response.data.data
+    return response.data
   },
   error => {
     const { code, message } = error.response.data

@@ -34,6 +34,7 @@
           </el-button>
           <template v-if="1 === scope.row.status">
             <el-button
+              :loading="buttonLoading"
               size="mini"
               type="danger"
               @click="handleToggleStatus(scope.row)"
@@ -42,6 +43,7 @@
           </template>
           <template v-else-if="0 === scope.row.status">
             <el-button
+              :loading="buttonLoading"
               size="mini"
               type="success"
               @click="handleToggleStatus(scope.row)"
@@ -63,7 +65,8 @@ export default {
     return {
       listLoading: true,
       listQuery: {},
-      list: []
+      list: [],
+      buttonLoading: false
     }
   },
   created() {
@@ -72,14 +75,14 @@ export default {
   methods: {
     async getList() {
       this.listLoading = true
-      const res = await fetchList()
-      console.log(res)
-      this.list = res.data
+      this.list = (await fetchList()).data.data
       this.listLoading = false
     },
     async handleToggleStatus(row) {
+      this.buttonLoading = true
       await togglePostStatus(row.id, !row.status + 0)
-      await this.posts()
+      this.buttonLoading = false
+      await this.getList()
     },
     handleDetail() {
       this.$alert('暂未开放该功能', '通知', {

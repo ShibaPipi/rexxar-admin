@@ -40,7 +40,7 @@
 import { fetchList } from '@/api/member'
 
 export default {
-  name: 'Index',
+  name: 'Users',
   data() {
     return {
       listLoading: true,

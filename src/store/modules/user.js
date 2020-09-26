@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import { log } from '@/utils/debug'
 
 const state = {
   token: getToken(),
@@ -29,43 +30,32 @@ const mutations = {
 }
 
 const actions = {
-  // user login
-  login({ commit }, userInfo) {
-    const { name, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ name: name.trim(), password: password }).then(response => {
-        commit('SET_TOKEN', response.token)
-        setToken(response.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+  async login({ commit }, { name, password }) {
+    const {
+      data: { token }
+    } = await login({ name: name.trim(), password })
+    commit('SET_TOKEN', token)
+    setToken(token)
   },
 
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        if (!response) {
-          reject('Verification failed, please Login again.')
-        }
+  async getInfo({ commit }) {
+    const {
+      data: {
+        roles, name, avatar, introduction
+      }
+    } = await getInfo()
 
-        const { roles, name, avatar, introduction } = response
-        // roles must be a non-empty array
-        if (!roles || roles.length <= 0) {
-          reject('getInfo: roles must be a non-null array!')
-        }
+    // roles must be a non-empty array
+    if (!roles || roles.length <= 0) {
+      log('getInfo: roles must be a non-null array!')
+    }
 
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
-        resolve(response)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    commit('SET_ROLES', roles)
+    commit('SET_NAME', name)
+    commit('SET_AVATAR', avatar)
+    commit('SET_INTRODUCTION', introduction)
+
+    return roles
   },
 
   // user logout

@@ -2,23 +2,23 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/topics',
+    url: '/notices',
     method: 'get',
     params: query
   })
 }
 
-export function storeTopic({ name }) {
+export function storeNotice({ title, content }) {
   return request({
-    url: '/topics',
+    url: '/notices',
     method: 'post',
-    params: { name }
+    params: { title, content }
   })
 }
 
-export function deleteTopic({ id }) {
+export function deleteNotice({ id }) {
   return request({
-    url: '/topics/' + id,
+    url: '/notices/' + id,
     method: 'delete'
   })
 }
