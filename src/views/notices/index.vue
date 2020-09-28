@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { fetchList, storeNotice, deleteNotice } from '@/api/notice'
+import { fetchList, store, destroy } from '@/api/notice'
 
 export default {
   name: 'Notices',
@@ -86,7 +86,7 @@ export default {
     },
     async handleStoreNotice() {
       this.newNoticeLoading = false
-      await storeNotice(this.form)
+      await store(this.form)
       this.newNoticeLoading = true
       await this.getList()
     },

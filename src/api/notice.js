@@ -8,7 +8,7 @@ export function fetchList(query) {
   })
 }
 
-export function storeNotice({ title, content }) {
+export function store({ title, content }) {
   return request({
     url: '/notices',
     method: 'post',
@@ -16,7 +16,7 @@ export function storeNotice({ title, content }) {
   })
 }
 
-export function deleteNotice({ id }) {
+export function destroy({ id }) {
   return request({
     url: '/notices/' + id,
     method: 'delete'

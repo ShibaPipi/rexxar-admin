@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { fetchList, togglePostStatus } from '@/api/post'
+import { fetchList, toggleStatus } from '@/api/post'
 
 export default {
   name: 'Posts',
@@ -80,7 +80,7 @@ export default {
     },
     async handleToggleStatus(row) {
       this.buttonLoading = true
-      await togglePostStatus(row.id, !row.status + 0)
+      await toggleStatus(row.id, !row.status + 0)
       this.buttonLoading = false
       await this.getList()
     },

@@ -8,7 +8,7 @@ export function fetchList(query) {
   })
 }
 
-export function storeTopic({ name }) {
+export function store({ name }) {
   return request({
     url: '/topics',
     method: 'post',
@@ -16,7 +16,7 @@ export function storeTopic({ name }) {
   })
 }
 
-export function deleteTopic({ id }) {
+export function destroy({ id }) {
   return request({
     url: '/topics/' + id,
     method: 'delete'

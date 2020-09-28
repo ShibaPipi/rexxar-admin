@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { fetchList, storeTopic, deleteTopic } from '@/api/topic'
+import { fetchList, store, destroy } from '@/api/topic'
 
 export default {
   name: 'Topics',
@@ -78,12 +78,12 @@ export default {
     },
     async handleStoreTopic() {
       this.newTopicLoading = true
-      await storeTopic(this.form)
+      await store(this.form)
       this.newTopicLoading = false
       await this.getList()
     },
     async deleteTopic(row) {
-      await deleteTopic(row)
+      await destroy(row)
       await this.getList()
     },
     submitForm() {
