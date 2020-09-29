@@ -55,31 +55,23 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button
-        :loading="loading"
-        type="primary"
-        style="width:100%;margin-bottom:30px;"
-        @click.native.prevent="handleLogin"
-      >
-        {{ $t('login.logIn') }}
-      </el-button>
-
-      <div style="position:relative">
-        <div class="tips">
-          <span>{{ $t('login.name') }} : admin</span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right:18px;">
-            {{ $t('login.name') }} : editor
-          </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-        </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          {{ $t('login.thirdparty') }}
-        </el-button>
-      </div>
+      <el-row :gutter="20">
+        <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+          <el-button
+            class="login-button"
+            :loading="loading"
+            type="primary"
+            @click.native.prevent="handleLogin"
+          >
+            {{ $t('login.logIn') }}
+          </el-button>
+        </el-col>
+        <el-col :xs="0" :sm="12" :md="12" :lg="12" :xl="12">
+          <el-button class="login-button" type="primary" @click="showDialog=true">
+            {{ $t('login.thirdparty') }}
+          </el-button>
+        </el-col>
+      </el-row>
     </el-form>
 
     <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
@@ -343,16 +335,8 @@ $light_gray: #eee;
     user-select: none;
   }
 
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
-
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
-    }
+  .login-button {
+    width: 100%;
   }
 }
 </style>

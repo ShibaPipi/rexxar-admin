@@ -88,7 +88,7 @@ export default {
     name: 'Name',
     password: 'Password',
     any: 'any',
-    thirdparty: 'Or connect with',
+    thirdparty: 'Or connect with...',
     thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !'
   },
   documentation: {
